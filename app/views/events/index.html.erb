@@ -1,0 +1,9 @@
+<h1>All Events</h1>
+<ul class="events">
+  <% @events.each do |event| %>
+    <li>
+      <%= event.title %><br>
+      <%= event.date %>
+    </li>
+  <% end %>
+</ul>
