@@ -10,6 +10,9 @@
   </head>
 
   <body>
+      <nav>
+        <%= current_user.name%>
+      </nav>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     <%= yield %>
