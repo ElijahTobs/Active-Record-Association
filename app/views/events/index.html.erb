@@ -3,7 +3,8 @@
   <% @events.each do |event| %>
     <li>
       <%= event.title %><br>
-      <%= event.date %>
+      <%= event.description %><br>
+      <br><%= button_to 'Check Event', event_path(event), method: :get %>
     </li>
   <% end %>
 </ul>

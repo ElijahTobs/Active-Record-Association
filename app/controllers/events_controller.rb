@@ -8,10 +8,18 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new
+    @event = current_user.created_events.build(event_params)
+    @event.save
+    redirect_to user_path(current_user)
   end
 
   def show
-    @event = Event.find(params[:id])
+    @user = Event.find(params[:id]).creator
+  end
+
+  private 
+
+  def event_params
+    params.require(:event).permit(:title, :description)
   end
 end
