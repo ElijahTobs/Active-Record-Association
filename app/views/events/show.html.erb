@@ -1,2 +1,11 @@
-<h1> <%= @user.name %></h1>
+<h2>Event created by <%= @event.creator.name %> </h2>
+
+<ul>
+  <% @event.attendees.each do |attendee| %>
+    <li>
+      <%= attendee.name %>
+    </li>
+  <% end %>
+</ul>
+
 <%= link_to 'Back to Events', events_path%>
