@@ -1,5 +1,5 @@
 <h2>Event created by <%= @event.creator.name %> </h2>
-
+<%= @event.title %>
 <ul>
   <% @event.attendees.each do |attendee| %>
     <li>
@@ -7,5 +7,5 @@
     </li>
   <% end %>
 </ul>
-
+<%= button_to 'Attend Event', edit_event_path(@event), method: :get %>
 <%= link_to 'Back to Events', events_path%>

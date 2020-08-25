@@ -13,10 +13,14 @@
       <nav>
       <ul style="display:flex;justify-content:space-between;width:50%">
         <li>
-          <%= current_user.name %>
+          <% if current_user %>
+            <%= current_user.name %>
+          <% end %>
         </li>
         <li>
-          <%= link_to 'Your Events', user_path(current_user) %>
+          <% if current_user %>
+            <%= link_to 'Your Events', user_path(current_user) %>
+          <% end %>
         </li>
         <li>
           <%= link_to 'Home', events_path, method: :get %>

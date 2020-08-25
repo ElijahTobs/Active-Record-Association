@@ -1,7 +1,14 @@
 <h1>Your Events</h1>
 
-<%= button_to 'Create New Event', new_event_path, method: :get %>
+<h4>Attended Events</h4>
+<% @user.attended_events.each do |event|%>
+  <li>
+    <%= event.title %>
+  </li>
+<% end %>
+<br>
 
+<h4>Created Events</h4>
 <ul>
   <% @user.created_events.each do |event| %>
     <li>
@@ -10,5 +17,9 @@
     </li>
   <% end %>
 </ul>
+
+
+
+<%= button_to 'Create New Event', new_event_path, method: :get %>
 
 <%= link_to 'Back to Events', events_path%>

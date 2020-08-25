@@ -15,6 +15,13 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @user = current_user
+  end
+
+  def edit
+    @event = Event.find(params[:id])
+    @event.attendees.push(current_user)
+    redirect_to event_path(@event)
   end
 
   private 
@@ -22,4 +29,5 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:title, :description)
   end
+
 end
