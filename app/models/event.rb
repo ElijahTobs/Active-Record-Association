@@ -3,21 +3,11 @@ class Event < ApplicationRecord
   has_many :event_attendees, foreign_key: :event, dependent: :destroy
   has_many :attendees, through: :event_attendees, source: :attendee, dependent: :destroy
 
-  def self.past
-    events = self.all
-    html = ""
-    events.each do |event|
-      html << "<li>#{event.title}</li>" if event.date < DateTime.now
-    end
-    html.html_safe
-  end
 
-  def self.upcoming
-    events = self.all
-    html = ""
-    events.each do |event|
-      html << "<li>#{event.title}</li>" if event.date > DateTime.now
-    end
-    html.html_safe
-  end
+  scope :past, -> { where( "date < ?", DateTime.now) }
+
+  scope :upcoming, -> { where( "date > ?", DateTime.now) }
+
+
+ 
 end
