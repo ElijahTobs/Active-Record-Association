@@ -29,3 +29,25 @@ nav a {
 nav a:hover {
   opacity: 1;
 }
+
+.home-page  {
+  margin: 1rem 4rem;
+}
+
+.flex,
+.flex-2 {
+  display: flex;
+}
+
+.upcoming,
+.right {
+  margin-left: 5rem;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  
+}

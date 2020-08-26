@@ -1,17 +1,15 @@
-<h1>All Events</h1>
-<ul class="events">
-  <% @events.each do |event| %>
-    <li>
-      <%= event.title %><br>
-      <%= event.description %><br>
-      <br><%= button_to 'Check Event', event_path(event), method: :get %>
-    </li>
-  <% end %>
-</ul>
+<div class="home-page">
+  <h1>All Events</h1>
 
-
-<h4>Past Events</h4>
-<%= print_events(@events.past) %>
-
-<h4>Upcoming Events</h4>
-<%= print_events(@events.upcoming) %>
+  <div class="flex">
+    <div class="past">
+      <h4>Past Events</h4>
+      <%= print_events(@events.past) %>
+    </div>
+    
+    <div class="upcoming">
+      <h4>Upcoming Events</h4>
+      <%= print_events(@events.upcoming) %>
+    </div>
+  </div>
+</div>
