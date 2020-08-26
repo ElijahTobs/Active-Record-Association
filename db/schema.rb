@@ -35,8 +35,6 @@ ActiveRecord::Schema.define(version: 2020_08_21_111302) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "encrypted_password"
-    t.datetime "remember_created_at"
   end
 
 end

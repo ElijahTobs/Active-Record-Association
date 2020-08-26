@@ -12,32 +12,18 @@
   <body>
       <nav>
         <ul style="display:flex;justify-content:space-between;width:50%">
-          <li>
-            <% if current_user %>
-              <%= current_user.name %>
-            <% end %>
-          </li>
-          <li>
-            <% if current_user %>
-              <%= link_to 'Your Events', user_path(current_user) %>
-            <% end %>
-          </li>
+          <%= show_user_name %>
+          <%= show_user_events %>
           <li>
             <%= link_to 'Home', events_path, method: :get %>
           </li>
-          <li>
-            <%= link_to 'Sign In', new_user_session_path, method: :get %>
-          </li>
-          <li>
-            <%= link_to 'Sign Up', new_user_registration_path, method: :get %>
-          </li>
-          <li>
-            <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
-          </li>
+          <%= show_sign_in_and_sign_up %>
+          <%= show_sign_out %>
         </ul>
       </nav>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
+
     <%= yield %>
   </body>
 

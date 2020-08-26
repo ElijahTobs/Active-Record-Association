@@ -8,9 +8,14 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = current_user.created_events.build(event_params)
-    @event.save
-    redirect_to user_path(current_user)
+    if current_user
+      @event = current_user.created_events.build(event_params)
+      @event.save
+      redirect_to user_path(current_user)
+    else
+      flash[:danger] = 'Please login'
+      redirect_to login_path
+    end
   end
 
   def show
@@ -20,8 +25,14 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
-    @event.attendees.push(current_user)
-    redirect_to event_path(@event)
+    if current_user
+      @event.attendees.push(current_user)
+      redirect_to event_path(@event)
+    else
+      flash[:notice] = 'Please login'
+      store_location
+      redirect_to login_path
+    end
   end
 
   private 
