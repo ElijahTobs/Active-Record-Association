@@ -2,6 +2,8 @@ AllCops:
   Exclude:
     - "Guardfile"
     - "Rakefile"
+    - "bin/*"
+    - "app/**/*"
 
   DisplayCopNames: true
 
