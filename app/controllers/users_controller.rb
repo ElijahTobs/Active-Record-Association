@@ -11,9 +11,12 @@ class UsersController < ApplicationController
       log_in(@user)
       flash[:notice] = 'Account created successfully!' 
       redirect_to events_path
+    elsif @user.name.empty?
+      flash[:alert] = 'Please enter name'
+      redirect_to signup_path
     else
-      render 'new'
-      flash.now[:alert] = 'User already registered. Use another name.'
+      flash[:alert] = 'User already registered. Use another name.'
+      redirect_to signup_path
     end
   end
 
