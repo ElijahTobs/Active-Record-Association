@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
     if @user
       log_in @user
       redirect_back_or @user
+      flash.now[:notice] = 'Logged in successfully!'
     else
       flash.now[:alert] = 'Invalid Name'
       render 'new'
