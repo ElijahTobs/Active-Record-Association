@@ -8,24 +8,20 @@
       <div class="flex">
         <div class="past">
           <h5>Past Events</h5>
-          <% @user.attended_events.each do |event|%>
-            <% if event.date < DateTime.now %>
-              <li>
-                <%= event.title %>
-              </li>
-            <% end %>
+          <% @attended_events.each do |event|%>
+            <li>
+              <%= event.title %>
+            </li>
           <% end %>
         </div>
         <br>
 
         <div class="upcoming">
           <h5>Upcoming Events</h5>
-          <% @user.attended_events.each do |event|%>
-            <% if event.date > DateTime.now %>
-              <li>
-                <%= event.title %>
-              </li>
-            <% end %>
+          <% @events_yet_to_attend.each do |event|%>
+            <li>
+              <%= event.title %>
+            </li>
           <% end %>
         </div>
       </div>
@@ -35,7 +31,7 @@
       <h3>Created Events</h3>
 
       <ul>
-        <% @user.created_events.each do |event| %>
+        <% @created_events.each do |event| %>
           <li>
             Title: &nbsp;&nbsp; <%= event.title %>
           </li>
