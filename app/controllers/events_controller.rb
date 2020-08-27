@@ -14,7 +14,7 @@ class EventsController < ApplicationController
       @event.save
       redirect_to user_path(current_user)
     else
-      flash[:danger] = 'Please login'
+      flash[:alert] = 'Please login'
       redirect_to login_path
     end
   end
