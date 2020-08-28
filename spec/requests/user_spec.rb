@@ -6,6 +6,7 @@ RSpec.describe 'User Management', type: :request do
     expect(response).to render_template(:new)
     post '/users', params: { user: { name: @name } }
   }
+  let(:event){ Event.create(title: 'This is a valid title') }
 
   context 'when user signs up with valid name' do
     it "logs in user and loads root" do
@@ -38,7 +39,7 @@ RSpec.describe 'User Management', type: :request do
 
   context 'when user tries to attend event while not logged in' do
     it 'redirects to login_path' do
-      Event.create
+      event
       get '/events/1/edit'
       expect(response).to redirect_to('/login')
     end
@@ -46,7 +47,7 @@ RSpec.describe 'User Management', type: :request do
 
   context 'when user attends to event while logged in' do
     it 'attends event' do
-      event = Event.create
+      event
       @name = 'Lucas'
       signup
       get '/events/1/edit'
@@ -54,7 +55,7 @@ RSpec.describe 'User Management', type: :request do
     end
 
     it 'reloads page' do
-      Event.create
+      event
       @name = 'Lucas'
       signup
       get '/events/1/edit'
