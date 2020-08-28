@@ -14,8 +14,9 @@ RSpec.describe User, type: :model do
     end
 
     context 'a user with a duplicated name' do
-      before { user user2 }
       it 'is invalid' do
+        user
+        user2
         expect(user1.valid?).to be(false)
       end
     end
@@ -39,8 +40,9 @@ RSpec.describe User, type: :model do
     end
 
     context 'event attended by user' do
-      before { user event }
       it 'is listed in user.attended_events' do
+        user
+        event
         event.attendees.push(user)
         expect(user.attended_events).to include(event)
       end
