@@ -30,21 +30,29 @@ RSpec.describe Event, type: :model do
     let(:event2){ user1.created_events.create(title: 'The second event') }
     
     context 'User can create more than one event' do
-      # before {user1;event1;event2}
       it 'is listed in user.created_events' do
         expect(user1.created_events).to include(event1,event2)
       end
     end
 
      context 'user can attend more than one event' do
-      # before {user;event1;event2}
       it 'is listed in user.attended_events' do
-        # event.attendees.push(user)
         user1.attended_events.push(event1,event2)
         expect(user1.attended_events).to include(event1,event2)
       end
     end
 
-    # context 'event can have many attendees' do
+    context 'event can have one or more attendees' do
+      it 'allows many attendees' do
+        event1.attendees.push(user1,user2)
+        expect(event1.attendees).to include(user1,user2)
+      end
+
+      it 'can allow one attendee' do
+        event2.attendees.push(user2)
+        expect(event2.attendees).to include(user2)
+      end
+
+    end
   end
 end
