@@ -63,19 +63,3 @@ RSpec.describe 'User Management', type: :request do
     end
   end
 end
-
-# RSpec.feature 'Forms', type: :feature do
-#   let(:user){User.create(name: 'Capybara')}
-#   describe 'signup' do
-#     context 'user signs up with invalid name' do
-#       it "flashes an error" do
-#         user
-#         # visit 'signup'
-#         fill_in 'user_name', with: 'Capybara'
-#         click_on 'Create Account'
-
-#         expect(page).to have_content "User already registered. Use another name."
-#       end
-#     end
-#   end
-# end
