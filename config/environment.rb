@@ -1,5 +1,4 @@
-
-$VERBOSE=nil
+$VERBOSE = nil
 # Load the Rails application.
 require_relative 'application'
 

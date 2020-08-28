@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe 'User Management', type: :request do
-  let(:signup){
+  let(:signup) do
     get '/signup'
     expect(response).to render_template(:new)
     post '/users', params: { user: { name: @name } }
-  }
-  let(:event){ Event.create(title: 'This is a valid title') }
+  end
+  let(:event) { Event.create(title: 'This is a valid title') }
 
   context 'when user signs up with valid name' do
-    it "logs in user and loads root" do
+    it 'logs in user and loads root' do
       @name = 'Lucas'
       signup
       user = User.find_by(name: 'Lucas')
@@ -17,7 +17,7 @@ RSpec.describe 'User Management', type: :request do
       expect(session[:user_id]).to eql(user.id)
     end
   end
-  
+
   context 'when user tries to signup with invalid name' do
     it "flashes \'existing name\' error and reloads the page" do
       User.create(name: 'Elijah')
@@ -35,7 +35,7 @@ RSpec.describe 'User Management', type: :request do
       expect(response).to redirect_to('/signup')
       expect(flash[:alert]).to eql('Please enter name')
     end
-  end  
+  end
 
   context 'when user tries to attend event while not logged in' do
     it 'redirects to login_path' do
