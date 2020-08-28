@@ -1,46 +1,42 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user){User.create(name: 'Capybara')}
-  describe 'signup functionality', type: :feature do
+  let(:user){ User.create(name: 'Capybara') }
+  
+  describe 'users#new (signup)', type: :feature do
+    let(:fill_form){ user;visit 'signup';fill_in 'user_name', with: @name;click_on 'Create Account' }
+
     context 'when user signs up with invalid name' do
       it "flashes an error" do
-        user
-        visit 'signup'
-        fill_in 'user_name', with: 'Capybara'
-        click_on 'Create Account'
-
+        @name = 'Capybara'
+        fill_form
         expect(page).to have_content "User already registered. Use another name."
       end
 
-      it 'stays in the same page' do
-        user
-        visit 'signup'
-        fill_in 'user_name', with: ''
-        click_on 'Create Account'
+      it 'reloads the same page' do
+        fill_form
         expect(page).to have_content "Sign Up"
       end
     end
 
     context 'when user tries to signup without a name' do
-      
       it 'flashes an error' do
-        user
-        visit 'signup'
-        fill_in 'user_name', with: ''
-        click_on 'Create Account'
+        @name = ''
+        fill_form
         expect(page).to have_content "Please enter name"
       end
 
       it 'stays in the same page' do
-        user
-        visit 'signup'
-        fill_in 'user_name', with: ''
-        click_on 'Create Account'
+        fill_form
         expect(page).to have_content "Sign Up"
       end
     end
   end
+  
+  describe 'signin functionality', type: :feature do
+    
+  end
+
 end
 
 # RSpec.feature 'Forms', type: :feature do
