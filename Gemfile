@@ -57,6 +57,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
   gem 'database_cleaner', '~> 1.8', '>= 1.8.5'
+  gem 'rails-controller-testing'
 end
 
 group :production do

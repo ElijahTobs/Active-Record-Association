@@ -1,56 +1,49 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User, type: :model  do
   let(:user){ User.create(name: 'Capybara') }
+  let(:user1){ User.create(name: 'Capybara') }
+  let(:user2){ User.create(name: '') }
   
-  describe 'users#new (signup)', type: :feature do
-    let(:fill_form){ user;visit 'signup';fill_in 'user_name', with: @name;click_on 'Create Account' }
-
-    context 'when user signs up with invalid name' do
-      it "flashes an error" do
-        @name = 'Capybara'
-        fill_form
-        expect(page).to have_content "User already registered. Use another name."
+  describe 'validation' do 
+    context 'a user with a unique name' do
+      before {user}
+      it 'is valid' do
+        expect(user.valid?).to be(true)
       end
-
-      it 'reloads the same page' do
-        fill_form
-        expect(page).to have_content "Sign Up"
+    end
+     
+    context 'a user with a duplicated name' do
+      before {user;user2}
+      it 'is invalid' do
+        expect(user1.valid?).to be(false)
       end
     end
 
-    context 'when user tries to signup without a name' do
-      it 'flashes an error' do
-        @name = ''
-        fill_form
-        expect(page).to have_content "Please enter name"
-      end
-
-      it 'stays in the same page' do
-        fill_form
-        expect(page).to have_content "Sign Up"
+    context 'a user without a name' do
+      before {user2}
+      it 'is invalid' do
+        expect(user2.valid?).to be(false)
       end
     end
   end
-  
-  describe 'signin functionality', type: :feature do
+
+  describe 'associations' do 
+    let(:event){ user.created_events.create(title: 'This is a valid title') } 
     
+    context 'event created by user' do
+      before {user}
+      it 'is listed in user.created_events' do
+        expect(user.created_events).to include(event)
+      end
+    end
+
+     context 'event attended by user' do
+      before {user;event}
+      it 'is listed in user.attended_events' do
+        event.attendees.push(user)
+        expect(user.attended_events).to include(event)
+      end
+    end
   end
-
 end
-
-# RSpec.feature 'Forms', type: :feature do
-#   let(:user){User.create(name: 'Capybara')}
-#   describe 'signup' do
-#     context 'user signs up with invalid name' do
-#       it "flashes an error" do
-#         user
-#         # visit 'signup'
-#         fill_in 'user_name', with: 'Capybara'
-#         click_on 'Create Account'
-
-#         expect(page).to have_content "User already registered. Use another name."
-#       end
-#     end
-#   end
-# end
