@@ -2,11 +2,7 @@
 <%= @event.title %><br>
 <br><%= @event.date %>
 
-<ul>
-  <% @event_attendees.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-</ul>
+
 <ul>
   <% @event_attendees.each do |attendee| %>
     <li>
