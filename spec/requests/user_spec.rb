@@ -1,4 +1,9 @@
 require 'rails_helper'
+require 'sessions_helper'
+
+RSpec.configure do |c|
+  c.include SessionsHelper
+end
 
 RSpec.describe 'User Management', type: :request do
   let(:signup) do
@@ -7,20 +12,35 @@ RSpec.describe 'User Management', type: :request do
     post '/users', params: { user: { name: @name } }
   end
   let(:event) { Event.create(title: 'This is a valid title') }
+  let(:user_existent) { User.create(name: 'Elijah') }
 
   context 'when user signs up with valid name' do
     it 'logs in user and loads root' do
       @name = 'Lucas'
       signup
-      user = User.find_by(name: 'Lucas')
       expect(response).to redirect_to('/events')
-      expect(session[:user_id]).to eql(user.id)
+      expect(session[:user_name]).to eql(current_user.name)
+    end
+
+    it 'shows up sign out link', type: :feature do
+      visit '/signup'
+      fill_in 'user_name', with: 'Lucas'
+      click_on 'commit'
+      expect(page).to have_content('Sign Out')
+    end
+
+    it 'hides sign in and sign up links', type: :feature do
+      visit '/signup'
+      fill_in 'user_name', with: 'Lucas'
+      click_on 'commit'
+      expect(page).to_not have_content('Sign In')
+      expect(page).to_not have_content('Sign Up')
     end
   end
 
   context 'when user tries to signup with invalid name' do
     it "flashes \'existing name\' error and reloads the page" do
-      User.create(name: 'Elijah')
+      user_existent
       @name = 'Elijah'
       signup
       expect(response).to redirect_to('/signup')
@@ -51,7 +71,7 @@ RSpec.describe 'User Management', type: :request do
       @name = 'Lucas'
       signup
       get '/events/1/edit'
-      expect(event.attendees).to include(User.find_by(name: 'Lucas'))
+      expect(event.attendees).to include(current_user)
     end
 
     it 'reloads page' do
