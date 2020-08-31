@@ -10,9 +10,14 @@ class EventsController < ApplicationController
 
   def create
     if current_user
-      @event = current_user.created_events.build(event_params)
-      @event.save
-      redirect_to user_path(current_user)
+      @event = current_user.created_events.create(event_params)
+      if @event.save
+        flash[:alert] = ''
+        redirect_to user_path(current_user)
+      else
+        flash[:alert] = 'Please add a title'
+        render 'new'
+      end
     else
       flash[:alert] = 'Please login'
       redirect_to login_path

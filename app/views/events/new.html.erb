@@ -2,8 +2,9 @@
 
 
 <%= form_for @event do |f| %>
-Title: <br><%= f.text_field :title %><br>
-Description: <br><%= f.text_area :description %><br>
-Date: <br> <%= f.datetime_field :date %>
-<%= f.submit value: 'Submit'%>
+  
+  Title: <br><%= f.text_field :title %><br>
+  Description: <br><%= f.text_area :description %><br>
+  Date: <br> <%= f.datetime_field :date %>
+  <%= f.submit value: 'Submit'%>
 <% end %>
