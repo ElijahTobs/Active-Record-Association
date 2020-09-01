@@ -10,6 +10,21 @@
   </head>
 
   <body>
+      <nav>
+        <ul style="display:flex;justify-content:space-between;width:50%">
+          <%= show_user_name %>
+          <%= show_user_events %>
+          <li>
+            <%= link_to 'Home', events_path, method: :get %>
+          </li>
+          <%= show_sign_in_and_sign_up %>
+          <%= show_sign_out %>
+        </ul>
+      </nav>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
+
+  
 </html>

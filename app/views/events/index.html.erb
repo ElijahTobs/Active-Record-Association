@@ -1,0 +1,15 @@
+<div class="home-page">
+  <h1>All Events</h1>
+
+  <div class="flex">
+    <div class="past">
+      <h4>Past Events</h4>
+      <%= print_events(@past_events) %>
+    </div>
+    
+    <div class="upcoming">
+      <h4>Upcoming Events</h4>
+      <%= print_events(@upcoming_events) %>
+    </div>
+  </div>
+</div>
